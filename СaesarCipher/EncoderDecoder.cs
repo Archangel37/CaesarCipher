@@ -8,13 +8,24 @@ namespace СaesarCipher
         /// <summary>
         ///     Лист с необходимыми алфавитами, можно добавить и символы и всё прочее
         /// </summary>
-        private readonly List<string> Alphabets = new List<string>
+        private List<string> Alphabets = new List<string>
         {
-            "abcdefghijklmnopqrstuvwxyz",
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-            "абвгдеёжзийклмнопрстуфхцчшщъыьэюя",
             "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
         };
+
+        /// <summary>
+        ///     Добавление нижнего регистра к уже имеющимся алфавитам
+        /// </summary>
+        private void AddLowersToAlphabet()
+        {
+            if (Alphabets.Contains(Alphabets[0].ToLower()) || Alphabets.Contains(Alphabets[1].ToLower())) return;
+            int counter = Alphabets.Count;
+            for (int i = 0; i < counter; i++)
+            {
+                Alphabets.Add(Alphabets[i].ToLower());
+            }
+        }
 
         /// <summary>
         ///     Кодирование при помощи алгоритма Цезаря
@@ -25,6 +36,8 @@ namespace СaesarCipher
         public string Code(string input, int shift)
         {
             string Result = string.Empty;
+            AddLowersToAlphabet();
+
             foreach (char ch in input)
             {
                 if (Alphabets.Any(alph => alph.Contains(ch)))
@@ -33,7 +46,7 @@ namespace СaesarCipher
                     int index = (temp_alph.IndexOf(ch) + shift) % temp_alph.Length >= 0 ?
                                 (temp_alph.IndexOf(ch) + shift) % temp_alph.Length
                                 : temp_alph.Length + (temp_alph.IndexOf(ch) + shift) % temp_alph.Length;
-                    Result += temp_alph[index].ToString();
+                    Result += temp_alph[index];
                 }
                 else Result += ch;
             }
