@@ -3,12 +3,12 @@ using System.Linq;
 
 namespace СaesarCipher
 {
-    class EncoderDecoder
+    static class EncoderDecoder
     {
         /// <summary>
         ///     Лист с необходимыми алфавитами, можно добавить и символы и всё прочее
         /// </summary>
-        private List<string> Alphabets = new List<string>
+        private static List<string> Alphabets = new List<string>
         {
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
@@ -17,7 +17,7 @@ namespace СaesarCipher
         /// <summary>
         ///     Добавление нижнего регистра к уже имеющимся алфавитам
         /// </summary>
-        private void AddLowersToAlphabet()
+        private static void AddLowersToAlphabet()
         {
             if (Alphabets.Contains(Alphabets[0].ToLower()) || Alphabets.Contains(Alphabets[1].ToLower())) return;
             int counter = Alphabets.Count;
@@ -33,7 +33,7 @@ namespace СaesarCipher
         /// <param name="input">Любой текст ("открытый текст")</param>
         /// <param name="shift">Сдвиг - любое целое число от int.MinValue до int.MaxValue</param>
         /// <returns></returns>
-        public string Code(string input, int shift)
+        public static string Code(string input, int shift)
         {
             string Result = string.Empty;
             AddLowersToAlphabet();
@@ -59,7 +59,7 @@ namespace СaesarCipher
         /// <param name="input">Любой шифр-текст ("шифр-текст")</param>
         /// <param name="shift">Сдвиг - любое целое число от int.MinValue до int.MaxValue - для дешифрации должен быть заранее определён</param>
         /// <returns></returns>
-        public string Decode(string input, int shift)
+        public static string Decode(string input, int shift)
         {
             return Code(input,-shift);
         }

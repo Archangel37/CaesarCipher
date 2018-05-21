@@ -36,6 +36,8 @@
             this.label_shift = new System.Windows.Forms.Label();
             this.label_input = new System.Windows.Forms.Label();
             this.label_outout = new System.Windows.Forms.Label();
+            this.CodeFile_btn = new System.Windows.Forms.Button();
+            this.DecodeFile_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Code_btn
@@ -108,11 +110,33 @@
             this.label_outout.TabIndex = 7;
             this.label_outout.Text = "Output text:";
             // 
+            // CodeFile_btn
+            // 
+            this.CodeFile_btn.Location = new System.Drawing.Point(254, 188);
+            this.CodeFile_btn.Name = "CodeFile_btn";
+            this.CodeFile_btn.Size = new System.Drawing.Size(75, 23);
+            this.CodeFile_btn.TabIndex = 8;
+            this.CodeFile_btn.Text = "Code File";
+            this.CodeFile_btn.UseVisualStyleBackColor = true;
+            this.CodeFile_btn.Click += new System.EventHandler(this.CodeFile_btn_Click);
+            // 
+            // DecodeFile_btn
+            // 
+            this.DecodeFile_btn.Location = new System.Drawing.Point(335, 188);
+            this.DecodeFile_btn.Name = "DecodeFile_btn";
+            this.DecodeFile_btn.Size = new System.Drawing.Size(75, 23);
+            this.DecodeFile_btn.TabIndex = 9;
+            this.DecodeFile_btn.Text = "Decode File";
+            this.DecodeFile_btn.UseVisualStyleBackColor = true;
+            this.DecodeFile_btn.Click += new System.EventHandler(this.DecodeFile_btn_Click);
+            // 
             // CaesarMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(554, 425);
+            this.Controls.Add(this.DecodeFile_btn);
+            this.Controls.Add(this.CodeFile_btn);
             this.Controls.Add(this.label_outout);
             this.Controls.Add(this.label_input);
             this.Controls.Add(this.label_shift);
@@ -138,6 +162,8 @@
         private System.Windows.Forms.Label label_shift;
         private System.Windows.Forms.Label label_input;
         private System.Windows.Forms.Label label_outout;
+        private System.Windows.Forms.Button CodeFile_btn;
+        private System.Windows.Forms.Button DecodeFile_btn;
     }
 }
 
