@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Linq;
+using System.Text;
 
 namespace СaesarCipher
 {
@@ -39,7 +40,8 @@ namespace СaesarCipher
         {
             try
             {
-                FileWorker.CodeFileVigenere();
+                if (string.IsNullOrWhiteSpace(textBox_shift.Text)) return;
+                FileWorker.CodeFileVigenere(Encoding.Default.GetBytes(textBox_shift.Text));
             }
             catch(Exception ex)
             {
@@ -51,7 +53,8 @@ namespace СaesarCipher
         {
             try
             {
-                FileWorker.DecodeFileVigenere();
+                if (string.IsNullOrWhiteSpace(textBox_shift.Text)) return;
+                FileWorker.DecodeFileVigenere(Encoding.Default.GetBytes(textBox_shift.Text));
             }
             catch (Exception ex)
             {

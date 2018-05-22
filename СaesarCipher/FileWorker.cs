@@ -7,7 +7,7 @@ namespace СaesarCipher
     /// <summary>
     ///     Класс для работы с файлами - кодирование-декодирование
     /// </summary>
-    static class FileWorker
+    internal static class FileWorker
     {
         /// <summary>
         ///     Открывает диалог выбора файла и передаёт полный путь к файлу с именем
@@ -29,15 +29,12 @@ namespace СaesarCipher
         {
             string path = PickUpFile();
 
-            Worker.ExecuteBW((o, args) => 
-            {
-                string result = EncoderDecoder.Code(File.ReadAllText(path, Encoding.UTF8), shift);
-                File.WriteAllText(path, result, Encoding.UTF8);
-            },
-            (o, args) => 
-            {
-                MessageBox.Show("Coding Done!");
-            });
+            Worker.ExecuteBW((o, args) =>
+                {
+                    string result = EncoderDecoder.Code(File.ReadAllText(path, Encoding.UTF8), shift);
+                    File.WriteAllText(path, result, Encoding.UTF8);
+                },
+                (o, args) => { MessageBox.Show("Coding Done!"); });
         }
 
         /// <summary>
@@ -49,53 +46,41 @@ namespace СaesarCipher
             string path = PickUpFile();
 
             Worker.ExecuteBW((o, args) =>
-            {
-                string result = EncoderDecoder.Decode(File.ReadAllText(path, Encoding.UTF8), shift);
-                File.WriteAllText(path, result, Encoding.UTF8);
-            },
-            (o, args) =>
-            {
-                MessageBox.Show($"Decoding Done!");
-            });
+                {
+                    string result = EncoderDecoder.Decode(File.ReadAllText(path, Encoding.UTF8), shift);
+                    File.WriteAllText(path, result, Encoding.UTF8);
+                },
+                (o, args) => { MessageBox.Show("Decoding Done!"); });
         }
 
         /// <summary>
         ///     Шифрует выбранный файл алгоритмом Вижинера, за основу ключа шифрования - мак-адрес и серийник раздела, где файл
         /// </summary>
-        public static void CodeFileVigenere()
+        public static void CodeFileVigenere(byte[] key)
         {
             string path = PickUpFile();
-
+            if (path == null) return;
             Worker.ExecuteBW((o, args) =>
-            {
-                string result = ChiffreDeVigenere.CodeVigenere(File.ReadAllText(path, Encoding.UTF8), 
-                    KeyGenerator.ReturnCode(path), true);
-                File.WriteAllText(path, result, Encoding.UTF8);
-            },
-            (o, args) =>
-            {
-                MessageBox.Show("Coding Chiffre De Vigenere Done!");
-            });
+                {
+                    byte[] array = File.ReadAllBytes(path);
+                    File.WriteAllBytes(path, ChiffreDeVigenere.CodeVigenere(array, key, true));
+                },
+                (o, args) => { MessageBox.Show("Coding Chiffre De Vigenere Done!"); });
         }
 
         /// <summary>
         ///     Дешифрует выбранный файл алгоритмом Вижинера, за основу ключа шифрования - мак-адрес и серийник раздела, где файл
         /// </summary>
-        public static void DecodeFileVigenere()
+        public static void DecodeFileVigenere(byte[] key)
         {
             string path = PickUpFile();
-
+            if(path == null) return;
             Worker.ExecuteBW((o, args) =>
-            {
-                string result = ChiffreDeVigenere.CodeVigenere(File.ReadAllText(path, Encoding.UTF8),
-                    KeyGenerator.ReturnCode(path), false);
-                File.WriteAllText(path, result, Encoding.UTF8);
-            },
-            (o, args) =>
-            {
-                MessageBox.Show($"Decoding Chiffre De Vigenere Done!");
-            });
+                {
+                    byte[] array = File.ReadAllBytes(path);
+                    File.WriteAllBytes(path, ChiffreDeVigenere.CodeVigenere(array, key, false));
+                },
+                (o, args) => { MessageBox.Show("Decoding Chiffre De Vigenere Done!"); });
         }
-
     }
 }
