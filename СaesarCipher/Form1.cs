@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace СaesarCipher
 {
@@ -38,7 +39,7 @@ namespace СaesarCipher
         {
             try
             {
-                FileWorker.CodeFile(int.Parse(textBox_shift.Text));
+                FileWorker.CodeFileVigenere();
             }
             catch(Exception ex)
             {
@@ -50,7 +51,7 @@ namespace СaesarCipher
         {
             try
             {
-                FileWorker.DecodeFile(int.Parse(textBox_shift.Text));
+                FileWorker.DecodeFileVigenere();
             }
             catch (Exception ex)
             {
