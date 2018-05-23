@@ -63,7 +63,7 @@ namespace СaesarCipher
             Worker.ExecuteBW((o, args) =>
                 {
                     byte[] array = File.ReadAllBytes(path);
-                    File.WriteAllBytes(path, ChiffreDeVigenere.CodeVigenere(array, key, true));
+                    File.WriteAllBytes(path, ChiffreDeVigenere.CodeVigenere(array, key));
                 },
                 (o, args) => { MessageBox.Show("Coding Chiffre De Vigenere Done!"); });
         }
@@ -78,7 +78,7 @@ namespace СaesarCipher
             Worker.ExecuteBW((o, args) =>
                 {
                     byte[] array = File.ReadAllBytes(path);
-                    File.WriteAllBytes(path, ChiffreDeVigenere.CodeVigenere(array, key, false));
+                    File.WriteAllBytes(path, ChiffreDeVigenere.DecodeVigenere(array, key));
                 },
                 (o, args) => { MessageBox.Show("Decoding Chiffre De Vigenere Done!"); });
         }
